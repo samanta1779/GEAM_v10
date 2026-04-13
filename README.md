@@ -6,7 +6,7 @@ pair interactions, general three-body terms with angular dependence, gradient-of
 contributions, and non-linear density functionals—all built from even-tempered
 Gaussian radial basis functions.
 
-**Contributing authors:** Haoyuan Shi, Bajrang Sharma, Ying Shi Teh, Hong Sun, Liming Zhao, Gopal Iyer, Xiao Han, Amit Samanta
+**Contributing authors:** Haoyuan Shi, Bajrang Sharma, Ying Shi Teh, Hong Sun, Liming Zhao, Gopal Iyer, Xiao Han, **Amit Samanta**
 
 **Collaborators:** John Klepeis, Vasily Bulatov, Babak Sadigh, Sebatien Hamel, Vince Lordi, Nicholas Bertin, Ellad Tadmor, Chloe Zeller
 
