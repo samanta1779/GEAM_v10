@@ -1,4 +1,4 @@
-# pair_style geam/alloy10 — Gaussian Extended Atom Method for LAMMPS
+# pair_style geam/alloy10 — Generalized EAM potential framework for LAMMPS
 
 A many-body interatomic potential for multi-element systems implemented as a
 LAMMPS pair style.  The model combines an EAM-like embedding energy, explicit
@@ -6,8 +6,8 @@ pair interactions, general three-body terms with angular dependence, gradient-of
 contributions, and non-linear density functionals—all built from even-tempered
 Gaussian radial basis functions.
 
-**Contributing authors:** Haoyuan Shi, Bajrang Sharma, Ying Shi Teh, Gopal Iyer, Amit Samanta
-
+**Contributing authors:** Haoyuan Shi, Bajrang Sharma, Ying Shi Teh, Hong Sun, Liming Zhao, Gopal Iyer, Xiao Han, Amit Samanta
+**Collaborators:** John Klepeis, Vasily Bulatov, Babak Sadigh, Sebatien Hamel, Vince Lordi, Nicholas Bertin, Ellad Tadmor, Chloe Zeller
 ---
 
 ## Table of contents
@@ -18,8 +18,6 @@ Gaussian radial basis functions.
 4. [Compilation](#4-compilation)
 5. [Example input script](#5-example-input-script)
 6. [Implementation notes](#6-implementation-notes)
-7. [Force verification](#7-force-verification)
-8. [Known issues](#8-known-issues)
 
 ---
 
@@ -413,38 +411,6 @@ For a representative system (16,000 atoms, 3 element types, all terms active,
 The three-body computation dominates because it scales as O($N_{\text{short}}^2$)
 per atom, where $N_{\text{short}}$ is the number of neighbors within the cutoff
 (typically 30–60 for metallic systems).
-
----
-
-## 7. Force verification
-
-A finite-difference force verification test is provided in
-`test_geam_alloy10_forces.py`.  It tests each energy term independently and
-all terms combined on a 256-atom FCC system with 3 element types:
-
-- Central difference with $\Delta x = 10^{-5}$ Å
-- 9 test atoms (3 per element type)
-- 7 test configurations isolating each term
-
-**Running the test:**
-
-```bash
-export LD_LIBRARY_PATH=/path/to/lammps/build:$LD_LIBRARY_PATH
-python3 test_geam_alloy10_forces.py
-```
-
-Expected output: all 63 checks pass with relative errors < 10⁻⁴.
-
----
-
-## 8. Known issues
-
-- The `single()` function is not implemented; calling it (e.g., via
-  `compute pair/local`) will produce an error.
-
-- The `Pair::single` interface does not naturally support many-body potentials
-  where the energy of a pair depends on the full neighborhood.  Per-atom
-  energies are available via `compute pe/atom`.
 
 ---
 
